@@ -1,16 +1,10 @@
 FROM onedata/builder
 MAINTAINER Jakub Valenta version: 0.1
 
-RUN apt-get install libcurl4-openssl-dev libdb++-dev libgoogle-glog-dev libboost-all-dev
+RUN apt-get update
+RUN apt-get install -y libcurl4-openssl-dev libdb++-dev libgoogle-glog-dev libboost-all-dev libtinyxml2-dev
 
-WORKDIR /opt
-RUN git clone https://github.com/leethomason/tinyxml2.git
-WORKDIR /opt/tinyxml2
-RUN git checkout 6.2.0
-RUN cmake . && make && make install
-
-WORKDIR /opt
-RUN git clone https://github.com/jakub-valenta/libodata.git
-WORKDIR /opt/libodata
-RUN cmake . && make && make install
-
+COPY odata-libodata-dev.deb /opt
+COPY odata-libodata.deb /opt
+RUN dpkg -i /opt/odata-libodata.deb
+RUN dpkg -i /opt/odata-libodata-dev.deb
