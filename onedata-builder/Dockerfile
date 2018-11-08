@@ -1,4 +1,4 @@
-FROM onedata/builder
+FROM onedata/builder:v66
 MAINTAINER Jakub Valenta version: 0.1
 
 RUN apt-get update
